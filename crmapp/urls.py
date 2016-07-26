@@ -20,5 +20,8 @@ from crmapp.marketing.views import HomePage
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^signup/$',
+        'crmapp.subscribers.views.subscriber_new',
+        name='sub_new'),
     url(r'^$', HomePage.as_view(), name="home"),
 ]
