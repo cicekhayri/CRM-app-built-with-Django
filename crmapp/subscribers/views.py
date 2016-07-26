@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from .forms import SubscriberForm
 
 
-def subscriber_new(request, template='subscriber/subscriber_new.html'):
+def subscriber_new(request, template='subscribers/subscriber_new.html'):
     if request.method == 'POST':
         form = SubscriberForm(request.POST)
         if form.is_valid():
