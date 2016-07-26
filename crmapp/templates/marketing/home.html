@@ -16,7 +16,7 @@
                 contact or follow up task again.</p>
             </div>
             <div class="row">
-                <a href="" class="sign-up btn btn-success">Sign Up Now for $15/month!</a>
+                <a href="{% url 'sub_new' %}" class="sign-up btn btn-success">Sign Up Now for $15/month!</a>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
             </div>
         </div>
         {# Second Signup Link #}
-        <a href="" class=" sgn-btm ">SIGN UP FOR ONLY $15/MONTH</a>
+        <a href="{% url 'sub_new' %}" class=" sgn-btm ">SIGN UP FOR ONLY $15/MONTH</a>
     </div>
     
 {% endblock content %}
