@@ -22,6 +22,7 @@ from crmapp.accounts.urls import account_urls
 from crmapp.contacts.urls import contact_urls
 from crmapp.contacts.views import ContactDelete
 from crmapp.communications.urls import comm_urls
+from crmapp.communications.views import CommDelete
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -56,5 +57,8 @@ urlpatterns = [
     url(r'^comm/new/$',
         'crmapp.communications.views.comm_cru', name='comm_new'
     ),
+    url(r'^comm/(?P<pk>[\w-]+)/delete/$',
+        CommDelete.as_view(), name='comm_delete'),
+    
     url(r'^$', HomePage.as_view(), name="home"),
 ]
