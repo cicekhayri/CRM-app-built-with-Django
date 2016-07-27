@@ -19,6 +19,8 @@ from django.contrib import admin
 from crmapp.marketing.views import HomePage
 from crmapp.accounts.views import AccountList
 from crmapp.accounts.urls import account_urls
+from crmapp.contacts.urls import contact_urls
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -39,6 +41,9 @@ urlpatterns = [
         AccountList.as_view(), name='account_list'),
 
     url(r'^account/(?P<uuid>[\w-]+)/', include(account_urls)),
+
+    # Contact related URLs
+    url(r'^contact/(?P<uuid>[\w-]+)/', include(contact_urls)),
 
     url(r'^$', HomePage.as_view(), name="home"),
 ]
