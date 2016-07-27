@@ -8,6 +8,7 @@ from .models import Account
 
 class AccountList(ListView):
     model = Account
+    paginate_by = 12
     template_name = 'accounts/account_list.html'
     context_object_name = 'accounts'
 
