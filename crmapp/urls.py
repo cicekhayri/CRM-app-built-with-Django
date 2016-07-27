@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from crmapp.marketing.views import HomePage
-from accounts.views import AccountList
+from crmapp.accounts.views import AccountList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,6 +33,6 @@ urlpatterns = [
     
     url(r'^account/list/$',
         AccountList.as_view(), name='account_list'),
-    
+
     url(r'^$', HomePage.as_view(), name="home"),
 ]
