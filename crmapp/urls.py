@@ -23,5 +23,12 @@ urlpatterns = [
     url(r'^signup/$',
         'crmapp.subscribers.views.subscriber_new',
         name='sub_new'),
+
+    url(r'^login/$',
+        'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+
+    url(r'^logout/$',
+        'django.contrib.auth.views.logout', {'next_page': '/login/'}),
+    
     url(r'^$', HomePage.as_view(), name="home"),
 ]
