@@ -32,4 +32,5 @@
            value="{% if request.GET.account %}
            {{ request.GET.account }}{% else %}{{ account.id }}{% endif %}"/>
     <input id="id_owner" name="owner" type="hidden" value="{{ user.username }}"/>
+    <input type="submit" value="Submit">
 </form>

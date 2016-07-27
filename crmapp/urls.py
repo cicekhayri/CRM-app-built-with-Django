@@ -53,12 +53,12 @@ urlpatterns = [
         ContactDelete.as_view(), name='contact_delete'),
 
     # Communication related URLs
-    url(r'^comm/(?P<uuid>[\w-]+)/', include(comm_urls)),
     url(r'^comm/new/$',
         'crmapp.communications.views.comm_cru', name='comm_new'
     ),
+    url(r'^comm/(?P<uuid>[\w-]+)/', include(comm_urls)),
     url(r'^comm/(?P<pk>[\w-]+)/delete/$',
         CommDelete.as_view(), name='comm_delete'),
-    
+
     url(r'^$', HomePage.as_view(), name="home"),
 ]
