@@ -21,6 +21,7 @@ from crmapp.accounts.views import AccountList
 from crmapp.accounts.urls import account_urls
 from crmapp.contacts.urls import contact_urls
 from crmapp.contacts.views import ContactDelete
+from crmapp.communications.urls import comm_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -50,5 +51,8 @@ urlpatterns = [
     url(r'^contact/(?P<pk>[\w-]+)/delete/$',
         ContactDelete.as_view(), name='contact_delete'),
 
+    # Communication related URLs
+    url(r'^comm/(?P<uuid>[\w-]+)/', include(comm_urls)),
+    
     url(r'^$', HomePage.as_view(), name="home"),
 ]
