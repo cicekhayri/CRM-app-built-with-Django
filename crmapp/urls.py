@@ -20,7 +20,7 @@ from crmapp.marketing.views import HomePage
 from crmapp.accounts.views import AccountList
 from crmapp.accounts.urls import account_urls
 from crmapp.contacts.urls import contact_urls
-
+from crmapp.contacts.views import ContactDelete
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -45,8 +45,10 @@ urlpatterns = [
     # Contact related URLs
     url(r'^contact/new/$',
         'crmapp.contacts.views.contact_cru', name='contact_new'),
-    
+
     url(r'^contact/(?P<uuid>[\w-]+)/', include(contact_urls)),
+    url(r'^contact/(?P<pk>[\w-]+)/delete/$',
+        ContactDelete.as_view(), name='contact_delete'),
 
     url(r'^$', HomePage.as_view(), name="home"),
 ]
