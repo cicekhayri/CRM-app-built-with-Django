@@ -1,3 +1,5 @@
 dj-static==0.0.6
 Django==1.9.8
+requests==0.13.2
 static3==0.7.0
+stripe==1.37.0
