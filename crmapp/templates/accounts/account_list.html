@@ -8,6 +8,10 @@
                 <h3 class="ad-mh">Account List
                     {# Add Account Link #}
                 </h3>
+                <form action="{% url 'account_list' %}" method="get">
+                    <input id="al-search" type="text" name="account" value="{{ request.GET.account }}" class="form-control">
+                    <input type="submit" value="Search" class="btn btn-success">
+                </form>
             </div>
             {# List Of Accounts #}
             <ul id="al-group" class="strip-list">
