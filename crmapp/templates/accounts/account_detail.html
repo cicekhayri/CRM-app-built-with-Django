@@ -33,6 +33,9 @@
             </div>
             <div id="co-body" class="ad-container">
                 {# Communcations Item Form #}
+                <div id="co-form-wrapper">
+                    {% include 'communications/comm_item_form.html' %}
+                </div>
                 {# List of Communcations #}
                 <ul id="co-list" class="strip-list col-md-12 p-none">
                     {% for comm in communications %}
