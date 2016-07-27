@@ -1,10 +1,38 @@
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from .models import Account
+from .forms import AccountForm
+
+
+@login_required()
+def account_cru(request):
+
+    if request.POST:
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            account = form.save(commit=False)
+            account.owner = request.user
+            account.save()
+            redirect_url = reverse(
+                'crmapp.accounts.views.account_detail',
+                args=(account.uuid,)
+            )
+            return HttpResponseRedirect(redirect_url)
+    else:
+        form = AccountForm()
+
+    variable = {
+        'form': form,
+    }
+
+    template = 'accounts/account_cru.html'
+
+    return render(request, template, variables)
 
 
 @login_required()
