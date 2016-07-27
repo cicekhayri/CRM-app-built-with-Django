@@ -53,6 +53,8 @@ urlpatterns = [
 
     # Communication related URLs
     url(r'^comm/(?P<uuid>[\w-]+)/', include(comm_urls)),
-    
+    url(r'^comm/new/$',
+        'crmapp.communications.views.comm_cru', name='comm_new'
+    ),
     url(r'^$', HomePage.as_view(), name="home"),
 ]
