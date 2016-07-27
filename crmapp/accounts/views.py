@@ -26,7 +26,7 @@ def account_cru(request):
     else:
         form = AccountForm()
 
-    variable = {
+    variables = {
         'form': form,
     }
 
