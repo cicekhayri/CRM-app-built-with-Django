@@ -5,6 +5,8 @@ from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+from crmapp.contacts.models import Contact
+
 from .models import Account
 from .forms import AccountForm
 
@@ -53,8 +55,11 @@ def account_detail(request, uuid):
     if account.owner != request.user:
         return HttpResponseForbidden()
 
+    contacts = Contact.objects.filter(account=account)
+
     variables = {
         'account': account,
+        'contacts': contacts,
     }
 
     return render(request, 'accounts/account_detail.html', variables)
