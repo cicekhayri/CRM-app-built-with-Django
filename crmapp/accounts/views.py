@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 
 from crmapp.contacts.models import Contact
 from crmapp.communications.models import Communication
+from crmapp.communications.forms import CommunicationForm
 
 from .models import Account
 from .forms import AccountForm
@@ -60,10 +61,13 @@ def account_detail(request, uuid):
     communications = Communication.objects.filter(
         account=account).order_by('-created_on')
 
+    form = CommunicationForm()
+
     variables = {
         'account': account,
         'contacts': contacts,
         'communications': communications,
+        'form': form
     }
 
     return render(request, 'accounts/account_detail.html', variables)
