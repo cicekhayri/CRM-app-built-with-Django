@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from crmapp.marketing.views import HomePage
+from accounts.views import AccountList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +30,9 @@ urlpatterns = [
 
     url(r'^logout/$',
         'django.contrib.auth.views.logout', {'next_page': '/login/'}),
+    
+    url(r'^account/list/$',
+        AccountList.as_view(), name='account_list'),
     
     url(r'^$', HomePage.as_view(), name="home"),
 ]
