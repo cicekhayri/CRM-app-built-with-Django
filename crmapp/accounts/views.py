@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from crmapp.contacts.models import Contact
+from crmapp.communications.models import Communication
 
 from .models import Account
 from .forms import AccountForm
@@ -56,10 +57,13 @@ def account_detail(request, uuid):
         return HttpResponseForbidden()
 
     contacts = Contact.objects.filter(account=account)
+    communications = Communication.objects.filter(
+        account=account).order_by('-created_on')
 
     variables = {
         'account': account,
         'contacts': contacts,
+        'communications': communications,
     }
 
     return render(request, 'accounts/account_detail.html', variables)
