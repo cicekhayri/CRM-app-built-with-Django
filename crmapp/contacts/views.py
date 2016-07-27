@@ -1,7 +1,9 @@
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
+from crmapp.accounts.models import Account
 
 from .models import Contact
 from .forms import ContactForm
@@ -19,9 +21,17 @@ def contact_detail(request, uuid):
 
 
 @login_required()
-def contact_cru(request):
+def contact_cru(request, uuid=None, account=None):
+
+    if uuid:
+        contact = get_object_or_404(Contact, uuid=uuid)
+        if contact.owner != request.user:
+            return HttpResponseForbidden()
+    else:
+        contact = Contact(owner=request.user)
+
     if request.POST:
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             # make sure the user owns the account
             account = form.cleaned_data['account']
@@ -37,11 +47,20 @@ def contact_cru(request):
                 args=(account.uuid,)
             )
             return HttpResponseRedirect(reverse_url)
+        else:
+            # if the form isn't valid, still fetch the account so it can be passed to the template
+            account = form.cleaned_data['account']
     else:
-        form = ContactForm()
+        form = ContactForm(instance=contact)
+
+    # this is used to fetch the account if it exists as a URL parameter
+    if request.GET.get('account', ''):
+        account = Account.objects.get(id=request.GET.get('account', ''))
 
     variables = {
         'form': form,
+        'contact': contact,
+        'account': account
     }
 
     template = 'contacts/contact_cru.html'
